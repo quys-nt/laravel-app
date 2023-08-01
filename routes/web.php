@@ -22,12 +22,23 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
 
+    Route::get('tin-tuc/{slug}-{id}.html', function ($slug = null, $id = null) {
+        $content = 'Phương thức Post của path/ Unicode với tham số: ';
+        $content .= 'id = ' . $id . '<br>';
+        $content .= 'slug = ' . $slug;
+        return $content;
+    })->where('id', '\d+')->where('slug', '.+');
+    // -> where(
+    //     [
+    //         // 'slug' => '[a-z-]+',
+    //         'slug' => '.+',
+    //         'id' => '[0-9]+',
+    //     ]
+    // )
+    // ;
+
     Route::get('show-form', function () {
         return view('form');
-    });
-
-    Route::get('unicode', function () {
-        return 'Phương thức Post của path/ Unicode';
     });
 
     Route::prefix('products')->group(function () {
