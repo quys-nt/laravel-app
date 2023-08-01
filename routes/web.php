@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', function () {
-    $user = new User();
-    $allUser = $user::all();
-    dd($allUser);
-    // return view('home');
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('show-form', function () {
+        return view('form');
+    });
+
+    Route::get('unicode', function () {
+        return 'Phương thức Post của path/ Unicode';
+    });
+
+    Route::prefix('products')->group(function () {
+        Route::get('/', function () {
+            return 'Danh sách sản phẩm';
+        });
+
+        Route::get('add', function () {
+            return 'Thêm sản phẩm';
+        });
+
+        Route::get('edit', function () {
+            return 'Sửa sản phẩm';
+        });
+
+        Route::get('delete', function () {
+            return 'Xoá sản phẩm';
+        });
+    });
 });
