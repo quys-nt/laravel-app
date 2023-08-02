@@ -6,6 +6,7 @@ use Faker\Guesser\Name;
 use Illuminate\Routing\RouteGroup;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,13 @@ use App\Http\Controllers\Admin\ProductsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 //Clients Routes
-Route::prefix('categories')->group(function () {
+Route::middleware('auth.admin')->prefix('categories')->group(function () {
     //Danh sách chuyên mục
     Route::get('/', [CategoriesController::class, 'index'])->name('categories.index');
-    
+
     //Lấy chi tiết 1 chuyên mục
     Route::get('/edit/{id}', [CategoriesController::class, 'getCategory'])->name('categories.edit');
 
@@ -41,8 +42,15 @@ Route::prefix('categories')->group(function () {
 
     //Xoá chuyên mục
     Route::post('/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('categories.delete');
+
+    //Hiện form upload
+    Route::get('/upload', [CategoriesController::class, 'getFile']);
+
+    //Sử lý file
+    Route::post('/upload', [CategoriesController::class, 'handleFile'])->name('categories.upload');
 });
 
-Route::prefix('admin')->group(function () {
+Route::middleware('auth.admin')->prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
     Route::resource('products', ProductsController::class);
 });
