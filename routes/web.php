@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Faker\Guesser\Name;
 use Illuminate\Routing\RouteGroup;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Admin\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,52 +18,31 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+//Clients Routes
+Route::prefix('categories')->group(function () {
+    //Danh sách chuyên mục
+    Route::get('/', [CategoriesController::class, 'index'])->name('categories.index');
+    
+    //Lấy chi tiết 1 chuyên mục
+    Route::get('/edit/{id}', [CategoriesController::class, 'getCategory'])->name('categories.edit');
 
-Route::get('/tin-tuc', 'App\Http\Controllers\HomeController@getNews')->name('news');
+    //Sử lý update chuyên mục
+    Route::post('/edit/{id}', [CategoriesController::class, 'updateCategory']);
 
-Route::get('/chuyen-muc/{id}', [Homecontroller::class, 'getCategories']);
+    //Hiện form add dữ liệu
+    Route::get('/add', [CategoriesController::class, 'addCategory'])->name('categories.add');
+
+    //Sử lý thêm chuyên mục
+    Route::post('/add', [CategoriesController::class, 'handleAddCategory']);
+
+    //Xoá chuyên mục
+    Route::post('/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('categories.delete');
+});
 
 Route::prefix('admin')->group(function () {
-
-    Route::get('tin-tuc/{id?}/{slug?}.html', function ($id = null, $slug = null) {
-        $content = 'Phương thức Post của path/ Unicode với tham số: ';
-        $content .= 'id = ' . $id . '<br>';
-        $content .= 'slug = ' . $slug;
-        return $content;
-    })->where('id', '\d+')->where('slug', '.+')->name('admin.tintuc');
-    // -> where(
-    //     [
-    //         // 'slug' => '[a-z-]+',
-    //         'slug' => '.+',
-    //         'id' => '[0-9]+',
-    //     ]
-    // )
-    // ;
-
-    Route::get('show-form', function () {
-        return view('form');
-    })->name('admin.show-form');
-
-    Route::prefix('products')->middleware('checkpermission')->group(function () {
-        Route::get('/', function () {
-            return 'Danh sách sản phẩm';
-        });
-
-        Route::get('add', function () {
-            return 'Thêm sản phẩm';
-        })->name('admin.products.add');
-
-        Route::get('edit', function () {
-            return 'Sửa sản phẩm';
-        });
-
-        Route::get('delete', function () {
-            return 'Xoá sản phẩm';
-        });
-    });
+    Route::resource('products', ProductsController::class);
 });
