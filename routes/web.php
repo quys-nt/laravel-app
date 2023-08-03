@@ -21,7 +21,15 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/san-pham', [HomeController::class, 'getCategories'])->name('product');
+
+Route::get('/them-san-pham', [HomeController::class, 'getAdd'])->name('add');
+
+// Route::post('/them-san-pham', [HomeController::class, 'postAdd']);
+
+Route::put('/them-san-pham', [HomeController::class, 'putAdd']);
+
 
 //Clients Routes
 Route::middleware('auth.admin')->prefix('categories')->group(function () {

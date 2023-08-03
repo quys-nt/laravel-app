@@ -12,3 +12,7 @@
 @section('content')
   Danh sách sản phẩm
 @endsection
+
+@push('scripts')
+    
+@endpush

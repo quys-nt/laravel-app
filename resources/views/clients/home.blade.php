@@ -16,6 +16,8 @@
         Trang chủ
       </h1>
     </div>
+
+    @datetime("2021-10-02 15:30:00")
   </section>
   @include('clients.contents.slide')
   @include('clients.contents.about')
