@@ -21,7 +21,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/san-pham', [HomeController::class, 'getCategories']);
+Route::get('/san-pham', [HomeController::class, 'getCategories'])->name('product');
 
 //Clients Routes
 Route::middleware('auth.admin')->prefix('categories')->group(function () {

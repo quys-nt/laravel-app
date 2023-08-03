@@ -10,23 +10,25 @@
 @endsection
 
 @section('content')
-  <h1>
-    Trang chủ
-  </h1>
+  <section>
+    <div class="container-fluid">
+      <h1>
+        Trang chủ
+      </h1>
+    </div>
+  </section>
+  @include('clients.contents.slide')
+  @include('clients.contents.about')
 @endsection
 
 
 @section('css')
   <style type="text/css">
-    body {
-      background-color: bisque;
-    }
   </style>
 @endsection
 
 
 @section('js')
   <script type="text/javascript">
-    console.log('helo');
   </script>
 @endsection
