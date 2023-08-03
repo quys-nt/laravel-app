@@ -12,25 +12,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        $this->data['welcome'] = 'Học lập trình Laravel';
-        $this->data['content'] = '
-            <h3>Chương 1: Nhập môn</h3>
-            <p>Kiến thức 1</p>
-            <p>Kiến thức 2</p>
-            <p>Kiến thức 3</p>
-        ';
-
-        $this->data['index'] = 1;
-
-        $this->data['dataArr'] = [
-            'Item 1',
-            'Item 2',
-            'Item 3',
-        ];
-
-        $this->data['message'] = 'Đặt hàng thành công !!';
-
-        return view('home', $this->data);
+        $this->data['title'] = 'Học lập trình Laravel';
+        return view('clients.home', $this->data);
     }
 
     //Active get news
@@ -39,8 +22,10 @@ class HomeController extends Controller
         return 'danh sach tin tuc';
     }
 
-    public function getCategories($id)
+    public function getCategories()
     {
-        return 'Danh sach chuyen muc: ' . $id;
+
+        $this->data['title'] = 'Trang sản phẩm';
+        return view('clients.product', $this->data);
     }
 }
