@@ -15,9 +15,12 @@
       <h1>
         Trang chủ
       </h1>
-    </div>
 
-    @datetime("2021-10-02 15:30:00")
+      @datetime("2021-10-02 15:30:00")
+      <x-alert type="info" :content="$message" data-icon="check-circle"/>
+      {{-- <x-input.button/>
+      <x-forms.button/> --}}
+    </div>
   </section>
   @include('clients.contents.slide')
   @include('clients.contents.about')

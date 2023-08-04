@@ -12,6 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $this->data['title'] = 'Học lập trình Laravel';
+        $this->data['message'] = 'Đăng ký tài khoản thành công!!';
         return view('clients.home', $this->data);
     }
 
@@ -39,11 +40,22 @@ class HomeController extends Controller
         // return 'phuong thuc POST';
         dd($request);
     }
-    
+
     public function putAdd(Request $request)
     {
         //
         // return 'phuong thuc PUT';
         dd($request);
+    }
+
+    public function getArr()
+    {
+        $contentArr = [
+            'title' => 'Học Laravel 10.x',
+            'lesson' => 'Hóc response của Laravel',
+            'academy' => 'Unide Code',
+        ];
+
+        return $contentArr;
     }
 }
