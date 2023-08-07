@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
@@ -57,5 +58,20 @@ class HomeController extends Controller
         ];
 
         return $contentArr;
+    }
+
+    public function downloadImg(Request $request)
+    {
+        if (!empty($request->img)) {
+            $image = trim($request->img);
+            // $fileName = 'image_'.uniqid().'.jpg';
+            $fileName = basename($image);
+            // echo $fileName;
+            // return response()->streamDownload(function () use ($image) {
+            //     $imageContent = file_get_contents($image);
+            //     echo $imageContent;
+            // }, $fileName);
+            return response()->download($image);
+        }
     }
 }

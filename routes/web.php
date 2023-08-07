@@ -115,3 +115,6 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::resource('products', ProductsController::class);
 });
+
+
+Route::get('/download-img',[HomeController::class,'downloadImg'])->name('download-img');
