@@ -32,20 +32,37 @@ class HomeController extends Controller
     public function getAdd()
     {
         $this->data['title'] = 'Thêm sản phẩm';
+        $this->data['errorMessage'] = 'Vui lòng kiểm tra lại dữ liệu!!';
         return view('clients.add', $this->data);
     }
 
     public function postAdd(Request $request)
     {
-        //
-        // return 'phuong thuc POST';
-        dd($request);
+        $rules = [
+            'product_name' => 'required|min:6',
+            'product_price' => 'required|integer'
+        ];
+        
+        // $messages = [
+        //     'product_name.required' => 'Trường :attribute bất buộc phải nhập',
+        //     'product_name.min' => 'Tên sản phẩm không được nhỏ hơn :min',
+        //     'product_pricze.required' => 'Giá sản phẩm là bắt buộc',
+        //     'product_price.integer' => 'Giá sản phẩm phải là số'
+        // ];
+
+        $messages = [
+            'required' => 'Trường :attribute là bắt buộc',
+            'min' => 'Trường :attribute phải lớn hơn :min',
+            'integer' => 'Trường :attribute phải là số'
+        ];
+
+        $request->validate($rules, $messages);
     }
 
     public function putAdd(Request $request)
     {
         //
-        // return 'phuong thuc PUT';
+        return 'phuong thuc PUT';
         dd($request);
     }
 

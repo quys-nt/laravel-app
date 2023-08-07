@@ -28,7 +28,7 @@ Route::get('/san-pham', [HomeController::class, 'getCategories'])->name('product
 
 Route::get('/them-san-pham', [HomeController::class, 'getAdd'])->name('add');
 
-// Route::post('/them-san-pham', [HomeController::class, 'postAdd']);
+Route::post('/them-san-pham', [HomeController::class, 'postAdd']);
 
 Route::put('/them-san-pham', [HomeController::class, 'putAdd']);
 
