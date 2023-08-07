@@ -53,12 +53,31 @@ Route::get('/demo-response', function () {
     // $response = (new Response($content))->header('Content-type','application/json');
     // $response = (new Response())->cookie('unicode', 'Training PHP Laravel 10.x', 30);
     // return $response;
-    $response = response()->view('clients.demo-test', [
-        'title' => 'Học Laravel unicode',
-    ], 201)
-        ->header('Content-Type', 'application/json')
-        ->header('API-key', '134567890');
-    return  $response;
+    // $response = response()->view('clients.demo-test', [
+    //     'title' => 'Học Laravel unicode',
+    // ], 201)
+    //     ->header('Content-Type', 'application/json')
+    //     ->header('API-key', '134567890');
+    // return  $response;
+
+    // $content = [
+    //     'name' => 'Unicode',
+    //     'Version' => 'Laravel 10.x',
+    //     'lesson' => 'HTTP response Laravel'
+    // ];
+    // return response()->json($content, 201, ['API-key' => '12334']);
+    return view('clients.demo-test');
+})->name('demo-response');
+
+Route::post('/demo-response', function (Request $request) {
+    if (!empty($request->username)) {
+        // return redirect()->route('demo-response');
+        // return redirect(route('demo-response'));
+        return back()->withInput();
+    }
+    else {
+        return redirect(route('demo-response'))->with('mess', 'validate không thanh công');
+    }
 });
 
 Route::get('demo-response-2', function (Request $request) {
