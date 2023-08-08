@@ -12,6 +12,10 @@
 @section('content')
   <section>
     <div class="container-fluid">
+      @if (session('msg'))
+        <x-alert type="{{ session('type') }}" content="{{ session('msg') }}" data-icon="times-circle" />
+      @endif
+
       <h1>
         Trang chủ
       </h1>
@@ -24,7 +28,7 @@
       <p>
         <a href="{{ route('download-img') . '?img=https://i.pinimg.com/564x/11/bd/20/11bd20f533facc49503bceecf71f545e.jpg' }}"
           class="btn btn-primary mx-2">Download Ảnh</a>
-        <a href="{{ route('download-img') . '?img='.public_path('storage/img-background-01.jpg') }}"
+        <a href="{{ route('download-img') . '?img=' . public_path('storage/img-background-01.jpg') }}"
           class="btn btn-info mx-2">Download Ảnh</a>
       </p>
     </div>
