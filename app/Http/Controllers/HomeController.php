@@ -40,25 +40,12 @@ class HomeController extends Controller
         return view('clients.add', $this->data);
     }
 
-    public function postAdd(Request $request)
+    public function postAdd(ProductRequest $request)
     {
         $rules = [
-            'product_name' => ['required', 'min:6', function ($attribute, $value, $fail) {
-                if ($value != mb_strtoupper($value, 'UTF-8')) {
-                    //Xãy ra lỗi
-                    // $fail('Trường :attribute không hợp lệ');
-                    isUppercase($value, 'Trường :attribute không hợp lệ', $fail);
-                }
-            }],
+            'product_name' => ['required', 'min:6'],
             'product_price' => ['required', 'integer']
         ];
-
-        // $messages = [
-        //     'product_name.required' => ':attribute bất buộc phải nhập',
-        //     'product_name.min' => ':attribute không được nhỏ hơn :min',
-        //     'product_price.required' => ':attribute là bắt buộc',
-        //     'product_price.integer' => ':attribute phải là số'
-        // ];
 
         $messages = [
             'required' => 'Trường :attribute là bắt buộc',
@@ -72,22 +59,28 @@ class HomeController extends Controller
             'product_price' => 'Giá sản phẩm',
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages, $attributes);
+        // $validator = Validator::make($request->all(), $rules, $messages, $attributes);
         // $validator->validate();
 
-        if ($validator->fails()) {
-            $validator->errors()->add('msg', 'Vui lòng kiểm tra lại dữ liệu');
-            //     return 'Validate thất bại';
-        } else {
-            //     return 'Validate thành công';
-            return redirect()->route('product')->with('msg', 'Validate thành công');
-        }
+        $request->validate($rules, $messages);
+
+        return response()->json(['status' => 'success']);
+
+        // $validator->validate();
+
+        // if ($validator->fails()) {
+        //     $validator->errors()->add('msg', 'Vui lòng kiểm tra lại dữ liệu');
+        //     //     return 'Validate thất bại';
+        // } else {
+        //     //     return 'Validate thành công';
+        //     return redirect()->route('product')->with('msg', 'Validate thành công');
+        // }
 
         // dd($request);
 
         // $request->validate($rules, $messages);
 
-        return back()->withErrors($validator);
+        // return back()->withErrors($validator);
     }
 
     public function putAdd(Request $request)
