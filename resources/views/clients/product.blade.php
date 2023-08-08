@@ -10,9 +10,15 @@
 @endsection
 
 @section('content')
-  Danh sách sản phẩm
+  <section>
+    <div class="container">
+      @if (session('msg'))
+        <div class="alert alert-success text-center">{{ session('msg') }}</div>
+      @endif
+      <h1>Danh sach sản phẩm</h1>
+    </div>
+  </section>
 @endsection
 
 @push('scripts')
-    
 @endpush

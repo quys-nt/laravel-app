@@ -130,6 +130,8 @@ return [
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
+    'uppercase' => 'Trường :attribute không hợp lệ',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -145,6 +147,14 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+        'product_name' => [
+            'uppercase' => 'Tên sản phẩm phải viết hoa',
+        ],
+
+        // 'product_price' => [
+        //     'uppercase' => 'Giá sản phẩm phải viết hoa',
+        // ]
     ],
 
     /*

@@ -15,7 +15,7 @@
           </div>
         @endif --}}
         @error('msg')
-          <div class="alert alert-danger text-center">{{ $message }}</div>
+          <div class="alert alert-danger text-center"><i class="fa fa-times-circle"></i>{{ $message }}</div>
         @enderror
         <div class="mb-3">
           <label for="">Thêm sản phẩm</label>

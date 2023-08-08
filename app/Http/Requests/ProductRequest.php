@@ -70,6 +70,6 @@ class ProductRequest extends FormRequest
         // throw new AuthorizationException('Bạn không có quyền tuy cập');
         // throw new HttpResponseException(redirect('/')->with('msg', 'Bạn không có quyền tuy cập')->with('type','danger'));
 
-        throw new HttpResponseException(abort(404));
+        // throw new HttpResponseException(abort(404));
     }
 }
