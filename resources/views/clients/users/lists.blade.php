@@ -22,6 +22,8 @@
             <th>Tên</th>
             <th>Email</th>
             <th width="15%">Thời Gian</th>
+            <th width="5%">Sửa</th>
+            <th width="5%">Xoá</th>
           </tr>
         </thead>
         <tbody>
@@ -33,11 +35,17 @@
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
                 <td>{{ $item->created_at }}</td>
+                <td>
+                  <a href="{{ route('users.edit', ['id' => $item->id]) }}" class="btn btn-warning btn-sm">Sửa</a>
+                </td>
+                <td>
+                  <a href="#" class="btn btn-danger btn-sm">Xoá</a>
+                </td>
               </tr>
             @endforeach
           @else
             <tr>
-              <td colspan="4"></td>
+              <td colspan="6"></td>
             </tr>
           @endif
 
