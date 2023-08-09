@@ -19,6 +19,9 @@ class UserController extends Controller
     //
     public function index()
     {
+
+        $statement = $this->users->statementUser("SELECT * FROM users");
+
         $title = 'Danh sách người dùng';
         $userlits = $this->users->getAllUsers();
         return view('clients.users.lists', compact('title', 'userlits'));
@@ -63,6 +66,8 @@ class UserController extends Controller
             if (!empty($userDetail[0])) {
                 $request->session()->put('id', $id);
                 $userDetail = $userDetail[0];
+            } else {
+                return redirect()->route('users.index')->with('msg', 'Người dùng không tồn tại');
             }
         } else {
             return redirect()->route('users.index')->with('msg', 'Liên kết người dùng không tồn tại!!');
@@ -77,7 +82,7 @@ class UserController extends Controller
         $id = session('id');
 
         if (empty($id)) {
-            return back()->with('msg','Liên kết không tồn tại');
+            return back()->with('msg', 'Liên kết không tồn tại');
         }
 
         $request->validate([
@@ -100,5 +105,25 @@ class UserController extends Controller
         $this->users->updateUser($dataUpdate, $id);
 
         return back()->with('msg', 'Cập nhật người dùng thành công!!');
+    }
+
+    public function delete($id)
+    {
+        if (!empty($id)) {
+            $userDetail = $this->users->getDetail($id);
+            if (!empty($userDetail[0])) {
+                $deleteStatus = $this->users->deleteUser($id);
+                if ($deleteStatus) {
+                    $msg = 'Xoá người dùng thành công';
+                } else {
+                    $msg = 'bạn không thể xoá người dùng lúc này';
+                }
+            } else {
+                $msg = 'Người dùng không tồn tại';
+            }
+        } else {
+            $msg = 'Liên kết người dùng không tồn tại!!';
+        }
+        return redirect()->route('users.index')->with('msg', $msg);
     }
 }
