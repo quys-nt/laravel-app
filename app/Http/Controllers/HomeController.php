@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Rules\Uppercase;
 
 class HomeController extends Controller
@@ -18,6 +20,13 @@ class HomeController extends Controller
     {
         $this->data['title'] = 'Học lập trình Laravel';
         $this->data['message'] = 'Đăng ký tài khoản thành công!!';
+
+        $users = DB::select('SELECT * FROM users WHERE email=:email', [
+            'email' => 'admin@gmail.com'
+        ]);
+
+        dd($users);
+
         return view('clients.home', $this->data);
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -74,8 +75,7 @@ Route::post('/demo-response', function (Request $request) {
         // return redirect()->route('demo-response');
         // return redirect(route('demo-response'));
         return back()->withInput();
-    }
-    else {
+    } else {
         return redirect(route('demo-response'))->with('mess', 'validate không thanh công');
     }
 });
@@ -117,4 +117,12 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
 });
 
 
-Route::get('/download-img',[HomeController::class,'downloadImg'])->name('download-img');
+Route::get('/download-img', [HomeController::class, 'downloadImg'])->name('download-img');
+
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('index');
+
+    Route::get('/add', [UserController::class, 'add'])->name('add');
+
+    Route::post('/add', [UserController::class, 'postAdd'])->name('post-add');
+});

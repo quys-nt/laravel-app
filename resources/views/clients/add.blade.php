@@ -57,6 +57,7 @@
         console.log(csrfTokem);
 
         $('.error').text('');
+        $('.msg').hide();
 
         $.ajax({
           url: actionUrl,
