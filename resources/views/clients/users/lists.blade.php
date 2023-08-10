@@ -15,8 +15,8 @@
       <h1>{{ $title }}</h1>
       <a href="{{ route('users.add') }}" class="btn btn-primary">Thêm người dùng</a>
       <hr>
-      <table class="table table-bordered">
-        <thead>
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
             <th width="5%">STT</th>
             <th>Tên</th>
