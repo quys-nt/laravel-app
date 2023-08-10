@@ -25,7 +25,7 @@ class HomeController extends Controller
             'email' => 'admin@gmail.com'
         ]);
 
-        dd($users);
+        // dd($users);
 
         return view('clients.home', $this->data);
     }

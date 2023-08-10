@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $title = 'Danh sách người dùng';
 
-        $this->users->learnQueryBuilder();
+        // $this->users->learnQueryBuilder();
 
         $userlits = $this->users->getAllUsers();
         return view('clients.users.lists', compact('title', 'userlits'));
