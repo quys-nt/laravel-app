@@ -11,7 +11,7 @@
     integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{ asset('assets/clients/css/bootstrap.min.css') }}">
-  {{-- <link rel="stylesheet" href="{{ asset('assets/clients/css/style.css') }}"> --}}
+  <link rel="stylesheet" href="{{ asset('assets/clients/css/style.css') }}">
   @yield('css')
 
 </head>
@@ -34,7 +34,7 @@
   @include('clients.blocks.footer')
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="{{ asset('assets/clients/js/bootstrap.min.js') }}"></script>
-  {{-- <script src="{{ asset('assets/clients/js/custom.js') }}"></script> --}}
+  <script src="{{ asset('assets/clients/js/custom.js') }}"></script>
   @yield('js')
   @stack('scripts')
 

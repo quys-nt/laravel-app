@@ -31,7 +31,6 @@ class UserController extends Controller
         $keywords = null;
 
         if (!empty($request->status)) {
-
             $status = $request->status;
 
             if ($status == 'active') {
@@ -44,20 +43,40 @@ class UserController extends Controller
         }
 
         if (!empty($request->group_id)) {
-
             $groupId = $request->group_id;
 
             $filters[] = ['users.group_id', '=', $groupId];
         }
 
         if (!empty($request->keywords)) {
-
             $keywords = $request->keywords;
-
         }
 
-        $userlits = $this->users->getAllUsers($filters, $keywords);
-        return view('clients.users.lists', compact('title', 'userlits'));
+        // Xử lý logic sắp xếp
+
+        $sortBy = $request->input('sort-by');
+
+        $sortType = $request->input('sort-type');
+
+        $allowSort = ['asc', 'desc'];
+
+        if (!empty($sortType) && in_array($sortType, $allowSort)) {
+            if ($sortType == 'desc') {
+                $sortType = 'asc';
+            } else {
+                $sortType = 'desc';
+            }
+        } else {
+            $sortType = 'asc';
+        }
+
+        $sortArr = [
+            'sortBy' => $sortBy,
+            'sortType' => $sortType
+        ];
+
+        $userlits = $this->users->getAllUsers($filters, $keywords, $sortArr);
+        return view('clients.users.lists', compact('title', 'userlits', 'sortType'));
     }
 
     public function add()

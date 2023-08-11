@@ -12,15 +12,27 @@ class Users extends Model
 
     protected $table = 'users';
 
-    public function getAllUsers($filters = [], $keywords = null)
+    public function getAllUsers($filters = [], $keywords = null, $sortByArr = null)
     {
         // $users =  DB::select('SELECT * FROM users ORDER BY created_at DESC');
         // DB::enableQueryLog();
-        
+
         $users = DB::table($this->table)
             ->select('users.*', 'groups.name as group_name')
-            ->join('groups', 'users.group_id', '=', 'groups.id')
-            ->orderBy('users.created_at', 'DESC');
+            ->join('groups', 'users.group_id', '=', 'groups.id');
+        // ->orderBy('users.created_at', 'DESC');
+
+        $orderBy = 'users.created_at';
+        $orderTypre = 'DESC';
+
+        if (!empty($sortByArr) && is_array($sortByArr)) {
+            if (!empty($sortByArr['sortBy']) && !empty($sortByArr['sortType'])) {
+                $orderBy = trim($sortByArr['sortBy']);
+                $orderTypre = trim($sortByArr['sortType']);
+            }
+        }
+
+        $users = $users->orderBy($orderBy, $orderTypre);
 
         if (!empty($filters)) {
             $users = $users->where($filters);
@@ -28,7 +40,7 @@ class Users extends Model
 
         if (!empty($keywords)) {
             $users = $users->where(function ($query) use ($keywords) {
-                $query->orWhere('email', 'like', '%' . $keywords . '%');
+                $query->orWhere('users.name', 'like', '%' . $keywords . '%');
             });
         }
 

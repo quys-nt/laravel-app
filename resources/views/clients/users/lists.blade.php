@@ -57,11 +57,11 @@
         <thead class="table-dark">
           <tr>
             <th width="5%">STT</th>
-            <th>Tên</th>
-            <th>Email</th>
+            <th><a href="?sort-by=name&sort-type={{ $sortType }}">Tên</a></th>
+            <th><a href="?sort-by=email&sort-type={{ $sortType }}">Email</a></th>
             <th>Nhóm</th>
             <th>Trạng thái</th>
-            <th width="15%">Thời Gian</th>
+            <th width="15%"><a href="?sort-by=created_at&sort-type={{ $sortType }}">Thời Gian</a></th>
             <th width="5%">Sửa</th>
             <th width="5%">Xoá</th>
           </tr>
