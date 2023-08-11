@@ -7,6 +7,8 @@ use App\View\Components\Alert;
 use App\View\Components\Input\Button;
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Pagination\Paginator;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -40,5 +42,7 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::component('package-alert', Alert::class);
         Blade::component('button', Button::class);
+
+        Paginator::useBootstrap();
     }
 }

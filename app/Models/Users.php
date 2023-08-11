@@ -12,7 +12,7 @@ class Users extends Model
 
     protected $table = 'users';
 
-    public function getAllUsers($filters = [], $keywords = null, $sortByArr = null)
+    public function getAllUsers($filters = [], $keywords = null, $sortByArr = null, $perPage = null)
     {
         // $users =  DB::select('SELECT * FROM users ORDER BY created_at DESC');
         // DB::enableQueryLog();
@@ -44,10 +44,16 @@ class Users extends Model
             });
         }
 
-        $users = $users->get();
+        // $users = $users->get();
+
+        if (!empty($perPage)) {
+            $users = $users->paginate($perPage)->withQueryString();  // 5 bản ghi trên 1 trang
+        } else {
+            $users = $users->get();
+        }
+
 
         // $sql = DB::getQueryLog();
-        // dd($sql);
 
         return $users;
     }

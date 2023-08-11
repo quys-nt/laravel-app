@@ -60,7 +60,7 @@
             <th><a href="?sort-by=name&sort-type={{ $sortType }}">Tên</a></th>
             <th><a href="?sort-by=email&sort-type={{ $sortType }}">Email</a></th>
             <th>Nhóm</th>
-            <th>Trạng thái</th>
+            <th width="10%">Trạng thái</th>
             <th width="15%"><a href="?sort-by=created_at&sort-type={{ $sortType }}">Thời Gian</a></th>
             <th width="5%">Sửa</th>
             <th width="5%">Xoá</th>
@@ -77,16 +77,16 @@
                 <td>{{ $item->group_name }}</td>
                 <td>
                   {!! $item->status == 0
-                      ? '<button class="btn btn-danger">Chưa kích hoạt</button>'
-                      : '<button class="btn btn-success">Chưa kích hoạt</button>' !!}
+                      ? '<button class="btn btn-danger w-100">Chưa kích hoạt</button>'
+                      : '<button class="btn btn-success w-100">Đã kích hoạt</button>' !!}
                 </td>
                 <td>{{ $item->created_at }}</td>
                 <td>
-                  <a href="{{ route('users.edit', ['id' => $item->id]) }}" class="btn btn-warning btn-sm">Sửa</a>
+                  <a href="{{ route('users.edit', ['id' => $item->id]) }}" class="btn btn-warning btn-sm w-100">Sửa</a>
                 </td>
                 <td>
                   <a onclick="return confirm('Bạn có chắc chắn muốn xoá')"
-                    href="{{ route('users.delete', ['id' => $item->id]) }}" class="btn btn-danger btn-sm">Xoá</a>
+                    href="{{ route('users.delete', ['id' => $item->id]) }}" class="btn btn-danger btn-sm w-100">Xoá</a>
                 </td>
               </tr>
             @endforeach
@@ -98,6 +98,10 @@
 
         </tbody>
       </table>
+
+      <div class="d-flex justify-content-center">
+        {{ $userlits->links() }}
+      </div>
 
     </div>
   </section>
