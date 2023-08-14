@@ -42,6 +42,40 @@
               @enderror
             </div>
 
+            <div class="row mb-3">
+              <div class="col-md-6">
+
+                <label for="">Nhóm</label>
+                <select class="form-control" name="group_id" id="">
+                  <option value="0">Chọn nhóm</option>
+                  @if (!empty($allGroups))
+                    @foreach ($allGroups as $item)
+                      <option value="{{ $item->id }}" {{ old('group_id') == $item->id ? 'selected' : false }}>
+                        {{ $item->name }}</option>
+                    @endforeach
+                  @endif
+                </select>
+                @error('group_id')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+
+              </div>
+
+              <div class="col-md-6">
+
+                <label for="">Trạng thái</label>
+                <select class="form-control" name="status">
+                  <option value="active" {{ request()->status == 'active' ? 'selected' : false }}>Kích hoạt</option>
+                  <option value="inactive" {{ request()->status == 'inactive' ? 'selected' : false }}>Chưa kích hoạt</option>
+                  </option>
+                </select>
+                @error('status')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+              </div>
+
+            </div>
+
             <div class="d-flex gap-2">
               <button type="submit" class="btn btn-primary w-100">Nhập mới</button>
               <a href="{{ route('users.index') }}" class="btn btn-warning w-100">Quay lại</a>

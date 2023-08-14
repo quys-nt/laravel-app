@@ -22,7 +22,7 @@
           <h1>{{ $title }}</h1>
 
 
-          <form action="{{route('users.post-edit')}}" method="POST">
+          <form action="{{ route('users.post-edit') }}" method="POST">
 
             <div class="mb-3">
               <label for="">Họ và tên</label>
@@ -40,6 +40,44 @@
               @error('email')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+
+                <label for="">Nhóm</label>
+                <select class="form-control" name="group_id" id="">
+                  <option value="0">Chọn nhóm</option>
+                  @if (!empty($allGroups))
+                    @foreach ($allGroups as $item)
+                      <option value="{{ $item->id }}"
+                        {{ old('group_id') == $item->id || $userDetail->group_id == $item->id ? 'selected' : false }}>
+                        {{ $item->name }}
+                      </option>
+                    @endforeach
+                  @endif
+                </select>
+                @error('group_id')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+
+              </div>
+
+              <div class="col-md-6">
+
+                <label for="">Trạng thái</label>
+                <select class="form-control" name="status">
+                  <option value="0" {{ old('status') == 0 || $userDetail->status == 0 ? 'selected' : false }}>
+                    Kích hoạt</option>
+                  <option value="1" {{ old('status') == 1 || $userDetail->status == 1 ? 'selected' : false }}>
+                    Chưa kích hoạt
+                  </option>
+                </select>
+                @error('status')
+                  <span class="text-danger">{{ $message }}</span>
+                @enderror
+              </div>
+
             </div>
 
             <div class="d-flex gap-2">

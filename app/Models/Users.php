@@ -60,7 +60,8 @@ class Users extends Model
 
     public function addUser($data)
     {
-        DB::insert('INSERT INTO users (name, email, created_at) values (?, ?,?)', $data);
+        // DB::insert('INSERT INTO users (name, email, created_at) values (?, ?,?)', $data);
+        return DB::table($this->table)->insert($data);
     }
 
     public function getDetail($id)
@@ -70,8 +71,10 @@ class Users extends Model
 
     public function updateUser($data, $id)
     {
-        $data[] = $id;
-        return DB::update('UPDATE ' . $this->table . ' SET name=?, email=?, created_at=? WHERE id = ?', $data);
+        // $data[] = $id;
+        // return DB::update('UPDATE ' . $this->table . ' SET name=?, email=?, created_at=? WHERE id = ?', $data);
+
+        return DB::table($this->table)->where('id', $id)->update($data);
     }
 
     public function deleteUser($id)
